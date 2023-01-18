@@ -2,32 +2,21 @@
 @section('content')
     <center>
         <b>
-            <h2> LIST DATA MATA PELAJARAN</h2>
-            <a href="/mapel/create" class="button-primary">TAMBAH DATA</a>
-            @if (session('success'))
-                <p class="text-success">{{ session('success') }}</p>
-            @endif
-            @if (session('error'))
-                <p class="text-danger">{{ session('error') }}</p>
-            @endif
-
-            <table cellpadding="10">
-                <tr>
-                    <th>NO</th>
-                    <th>MATA PELAJARAN</th>
-                    <th>ACTION</th>
-                </tr>
-                @foreach ($mapel as $m)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $m->nama_mapel }}</td>
-                    <td>
-                        <a href="mapel/edit{{ $m->id }}" class="button-warning">EDIT</a>
-                        <a href="/mapel/destroy {{ $m->id }}" onclick="return confirm('Yakin Hapus?')">HAPUS</a>                  
-                        </td>
-                </tr>
-                @endforeach
-            </table>
+            <h2>TAMBAH DATA MATA PELAJARAN</h2>
+            <form method="POST" action="/mengajar/store">
+                @csrf
+                <table width="50%">
+                    <tr>
+                        <td width="25%">MATA PELAJARAN</td>
+                        <td width="25%"><input type="text" name="nama_mapel"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <center><button class="button-primary" type="submit">SIMPAN</button></center>
+                        </td> 
+                    </tr>
+                </table>
+            </form>
         </b>
     </center>
     @endsection
