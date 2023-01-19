@@ -3,7 +3,7 @@
     <center>
         <b>
             <h2>TAMBAH DATA MATA PELAJARAN</h2>
-            <form method="POST" action="/mengajar/store">
+            <form method="POST" action="/mapel/store">
                 @csrf
                 <table width="50%">
                     <tr>

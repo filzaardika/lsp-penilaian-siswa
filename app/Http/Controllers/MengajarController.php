@@ -31,9 +31,9 @@ class MengajarController extends Controller
     {
         //
         return view('mengajar.create', [
-            'mengajar' => mengajar::all(),
-            'mapel' => mapel::all(),
-            'kelas' => kelas::all()
+            'guru' => Guru::all(),
+            'mapel' => Mapel::all(),
+            'kelas' => Kelas::all()
         ]);
     }
 
@@ -49,7 +49,7 @@ class MengajarController extends Controller
         $data_mengajar = $request->validate([
             'guru_id' => ['required'],
             'mapel_id' => ['required'],
-            'kelas' => ['required']
+            'kelas_id' => ['required']
         ]);
         Mengajar::create($data_mengajar);
         return redirect('/mengajar/index')->with('success', "data mengajar berhasil di tambah");
@@ -108,7 +108,7 @@ class MengajarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(mengajar $mengajar)
+    public function destroy(Mengajar $mengajar)
     {
         $mengajar->delete();
         return back()->with('success', "Data mengajar Berhasil di Hapus");
