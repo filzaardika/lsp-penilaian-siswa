@@ -1,50 +1,45 @@
-@extends('main.layout')
-@section('content')
+@extends ('main.layout')
+@section ('content')
     <center>
-        <b> 
+        <br>
             <h2>LIST DATA NILAI</h2>
-            @if (session('user')->role == 'guru')
-                <a href="/nilai/create"class="button-primary"> TAMBAH DATA </a>
-                @endif
-
+            <a href="/nilai/create" class="button-primary">TAMBAH DATA</a>
             @if (session('success'))
-            <p class="text-success">{{ session('success') }}</p>   
+                <p class="text-success">{{ session('success') }}</p>
             @endif
-
-            <table cellpadding="10">
+            @if (session('error'))
+                <p class="text-danger">{{ session('error') }}</p>
+            @endif
+            <table cellPadding="10">
                 <tr>
                     <th>NO</th>
                     <th>GURU MAPEL</th>
                     <th>NAMA SISWA</th>
-                    <th>UH </th>
+                    <th>UH</th>
                     <th>UTS</th>
                     <th>UAS</th>
                     <th>NA</th>
-                    @if (session('user')->role == 'guru')
-                      <td>ACTION</td>
-                      @endif
+                    @if (session('user')->role == "guru")
+                        <th>ACTION</th>
+                    @endif
                 </tr>
-            @foreach ($nilai as $each )
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $each->mengajar->guru->nama_guru }} {{ $each->mengajar->mapel->nama_mapel }}</td>
-                <td>{{ $each->siswa->nama_siswa }}</td>
-                <td>{{ $each->uh }}</td>
-                <td>{{ $each->uts }}</td>
-                <td>{{ $each->uas }}</td>
-                <td>{{ $each->na }}</td>
-                @if (session('user')->role == 'guru')
-                <td>
-                    <a href="/nilai/edit/{{ $each->id }}" class="button-warning">EDIT</a>
-                    <a href="/nilai/destroy{{ $each->id }}" onclick="return confirm('Yakin Hapus?')"
-                       class="button-danger">HAPUS</a> 
-                </td>  
-                @endif
-            </tr>
-            @endforeach
-                    
-              
-                </table>
-        </b>
+                @foreach ($nilai as $n)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $n ->mengajar->guru->nama_guru}} {{ $n->mengajar->mapel->nama_mapel }}</td>
+                        <td>{{ $n ->siswa->nama_siswa }}</td>
+                        <td>{{ $n ->uh }}</td>
+                        <td>{{ $n ->uts }}</td>
+                        <td>{{ $n ->uas }}</td>
+                        <td>{{ $n ->na }}</td>
+                        @if (session('user')->role == "guru")
+                            <td>
+                                <a href="/nilai/edit/{{ $n -> id }}" class="button-warning">Edit</a>
+                                <a href="/nilai/destroy/{{ $n -> id }}" class="button-danger" onclick="return confrim('Yakin ingin dihapus?')">Hapus</a>
+                            </td>
+                        @endif
+                    </tr>
+                @endforeach
+            </table>
     </center>
 @endsection
